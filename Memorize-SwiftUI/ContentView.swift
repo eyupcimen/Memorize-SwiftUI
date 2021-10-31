@@ -11,47 +11,67 @@ struct ContentView: View {
     
     var body: some View {
         HStack{
-            ZStack{
-                RoundedRectangle(cornerRadius: 25.0, style: .continuous)
-                    .stroke(lineWidth: 3.0)
-                Text("Hello World!")
-                    .padding()
-            }
-            ZStack{
-                RoundedRectangle(cornerRadius: 25.0, style: .continuous)
-                    .stroke(lineWidth: 3.0)
-                Text("Hello World!")
-                    .padding()
-            }
-            ZStack{
-                RoundedRectangle(cornerRadius: 25.0, style: .continuous)
-                    .stroke(lineWidth: 3.0)
-                Text("Hello World!")
-                    .padding()
-            }
-            ZStack{
-                RoundedRectangle(cornerRadius: 25.0, style: .continuous)
-                    .stroke(lineWidth: 3.0)
-                Text("Hello World!")
-                    .padding()
-            }
+            CardView()
+            CardView()
+            CardView()
+            CardView()
         }
-            .padding(.horizontal)
-            .foregroundColor(.orange)
+        .padding(.horizontal)
+        .foregroundColor(.orange)
             
-            //NavigationView {
-            //.navigationTitle(Text("Standford SwiftUI"))
-            //.navigationBarTitleDisplayMode(.large)
-      
     }
 }
+
 
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        Group{
+            ContentView()
+                .preferredColorScheme(.dark)
+            ContentView()
+                
+        }
     }
 }
+
+struct CardView : View {
+    @State var isFaceUp : Bool = true
+    
+    var body : some View {
+        ZStack {
+            let shape : RoundedRectangle = RoundedRectangle(cornerRadius: 20.0)
+            if isFaceUp {
+                
+                shape
+                    .fill()
+                    .foregroundColor(.white)
+                
+                shape
+                    .stroke(lineWidth: 3.0)
+                
+                Text("✈️")
+                    .font(.largeTitle)
+            } else {
+                
+                shape
+                    .stroke(lineWidth: 3.0)
+                
+            }
+        }
+        .onTapGesture {
+            print("Success!!")
+            isFaceUp = !isFaceUp
+        }
+    }
+}
+//let shape = Circle()
+
+
+//NavigationView {
+//.navigationTitle(Text("Standford SwiftUI"))
+//.navigationBarTitleDisplayMode(.large)
+
 
 // .edgesIgnoringSafeArea(.bottom)
 //Button("Show Menu") {
@@ -68,6 +88,15 @@ struct ContentView_Previews: PreviewProvider {
 //                .padding()
 //        }
 //
+//    }
+//
+//}
+
+
+//extension Text {
+//
+//    @inlinable public func addModif() -> some View {
+//        self.accentColor(.red)
 //    }
 //
 //}
