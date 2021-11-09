@@ -8,28 +8,49 @@
 import SwiftUI
 
 struct ContentView: View {
-    var emojis : Array<String> = ["🚂","🚀","🚁","🚜"]
+    var emojis = ["🚲","🚂","🚀","🚁","🚜" ,"🚗","🚕","🚙" ,"🚌","🚎","🏎","🚓","🚑","🚒","🚐","🛻","🚚","🚛","🛴","🛵","🛺","🚔","🚍","🚘","🚖","🚡","🚠","🚟","🚃","🚋","🚞","🚝","🚄","🚅","🚈","🚆","🚇","🚊","🚉","✈️","🛫","🛬","🛩","💺","🛰","🛸","🛶","⛵️","🚤","🛥","🛳","⛴","🚢"]
+    @State var emojiCount = 4
     var body: some View {
-        HStack{
-            CardView(content: emojis[0])
-            CardView(content: emojis[1])
-            CardView(content: emojis[2])
-            CardView(content: emojis[3])
+        VStack{
+            HStack{
+                ForEach(emojis[0..<emojiCount] , id: \.self ,content: { emoji in
+                    CardView(content: emoji)
+                })
+            }
+            HStack{
+                Button(action: {
+                    emojiCount -= 1
+                }, label: {
+                    VStack{
+                        Text("Remove")
+                        Text("Card")
+                    }
+                })
+//                Spacer()
+//                Text("Shuffle").font(.body)
+                Spacer()
+                Button(action: {
+                    emojiCount += 1
+                }, label: {
+                    VStack{
+                        Text("Add")
+                        Text("Card")
+                    }
+                })
+            }
+            .padding(.horizontal)
         }
+        
         .padding(.horizontal)
         .foregroundColor(.red)
-            
     }
 }
-
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group{
             ContentView()
                 .preferredColorScheme(.dark)
-            // ContentView()
         }
     }
 }
